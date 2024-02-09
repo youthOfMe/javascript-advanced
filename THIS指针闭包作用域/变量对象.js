@@ -71,3 +71,34 @@ foo(1)
         d: refernece ro FunctionExpresstion d (指的是函数表达式d)
     }
 */
+
+function foo1() {
+    console.log(a);
+    a = 1
+}
+
+foo()
+
+// 分析阶段
+AO = {
+    arguments: {
+        length: 0
+    }
+}
+// 执行阶段
+AO = {
+    a: undefined // 找不到值 引用使用 报错
+}
+
+function foo2() {
+    console.log(a);
+    var a = 1
+}
+
+foo2()
+
+function bar() {
+    a = 1
+    console.log(a)
+}
+bar()
