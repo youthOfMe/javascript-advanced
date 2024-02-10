@@ -74,7 +74,7 @@ foo(1)
 
 function foo1() {
     console.log(a);
-    a = 1
+    a = 1 // 在这里进行这样直接定义的时候 是执行foo的时候会定义一个window.a 也就是这样写这个a会被提前到全局进行去声明
 }
 
 foo()
@@ -90,9 +90,22 @@ AO = {
     a: undefined // 找不到值 引用使用 报错
 }
 
+// AO中的变量提升是AO里面的变量提升 不是全局上下文的变量提升
 function foo2() {
     console.log(a);
     var a = 1
+}
+
+// 分析阶段
+AO = {
+    arguments: {
+        length: 0
+    },
+    a: undefined
+}
+// 执行阶段
+AO = {
+    a: undefined, // 找到声明但是使用的时候a是undefined 后进行赋值变为1
 }
 
 foo2()
@@ -102,3 +115,12 @@ function bar() {
     console.log(a)
 }
 bar()
+
+AO = {
+    arguments: {
+        length: 0,
+    }
+}
+
+// 为什么会有变量提升?
+// 因为AO在准备函数上下文的时候准备的是变量和函数的声明而不是赋值
