@@ -36,6 +36,9 @@ const a1 = {
 // DOM1 --> 融合各家的规范 但是没有给出具体的代码方案
 // DOM2 --> 
 
+// DOM0的原生浏览器事件
+btn.onclick
+
 // DOM2事件定义的规范
 addEventListener
 removeEventListener
