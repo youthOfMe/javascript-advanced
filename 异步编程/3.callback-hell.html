@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 回调地狱
+        function f1(f2) {
+            f2(function (f3) {
+                f3(function (f4) {
+                    f4(function () { });
+                });
+            });
+        }
+
+        f1(function (f2) {
+            const t1 = "f1";
+            console.log(t1);
+            f2(function (f3) {
+                const t2 = `${t1},f2`;
+                console.log(t2);
+                f3(function (f4) {
+                    const t3 = `${t2},f3`;
+                    console.log(f3);
+                    f4();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
