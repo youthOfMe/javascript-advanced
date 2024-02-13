@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        异步编程的历史
+            1. callback
+            2. promise
+            3. async await
+     -->
+    <div id="wrapper"></div>
+    <button id="btn">获取数据</button>
+
+    <script>
+        const btnDom = document.querySelector("#btn")
+        const wrapperDom = document.querySelector("#wrapper")
+
+        const fetchData = () => {
+            // 模拟请求 后端服务会在1s后返回数据
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("Hello World")
+                }, 1000)
+            })
+
+        }
+
+        btnDom.addEventListener('click', () => {
+            wrapperDom.innerHTML = "loading..."
+            fetchData().then(data => {
+                wrapperDom.innerHTML = data
+            }) // 形参接收
+        }, true)
+    </script>
+</body>
+
+</html>
