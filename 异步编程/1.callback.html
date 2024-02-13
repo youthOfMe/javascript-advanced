@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        异步编程的历史
+            1. callback
+            2. promise
+            3. async await
+     -->
+    <div id="wrapper"></div>
+    <button id="btn">获取数据</button>
+
+    <script>
+        const btnDom = document.querySelector("#btn")
+        const wrapperDom = document.querySelector("#wrapper")
+
+        const fetchData = (callback) => {
+            // 模拟请求 后端服务会在1s后返回数据
+            setTimeout(() => {
+                // 这块逻辑很明显不应该耦合在这里
+                // 因为这块儿是操作视图部分的内容 不必应该与服务层内容耦合
+                // view service controller
+                // MVC model view controller
+                // wrapperDom.innerHTML = "data"
+                callback("Hello World") // 传入了实参
+            }, 1000)
+
+        }
+
+        btnDom.addEventListener('click', () => {
+            wrapperDom.innerHTML = "loading..."
+            fetchData(function (data) {
+                wrapperDom.innerHTML = data
+            }) // 形参接收
+        }, true)
+    </script>
+</body>
+
+</html>
